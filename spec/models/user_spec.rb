@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
       let(:invalid_message) { 'Invalid_message' }
       let(:error_message) do
         {
-          email: ['invalid email']
+          email: ['invalid format']
         }
       end
       before do
@@ -55,6 +55,42 @@ RSpec.describe User, type: :model do
       end
 
       it { expect(user_b.errors.messages).to eq(error_message) }
+    end
+  end
+
+  describe 'callback :before_create' do
+    context 'when the password is in correct format' do
+      let(:valid_password) { 'ValidPassword@123'}
+      let(:user) do
+        create(:user, encrypted_password: valid_password )
+      end
+
+      let(:password_valid?) do
+        my_password = BCrypt::Password.new(user.encrypted_password)
+
+        my_password == valid_password
+      end
+
+      it { expect(password_valid?).to eq(true) }
+    end
+  end
+
+  describe 'callback :before_update' do
+    context 'when the password is in correct format' do
+      let(:valid_password) { 'ValidPasswordUpdate@123'}
+      let(:user) { create(:user) }
+
+      before do
+        user.update(encrypted_password: valid_password)
+      end
+
+      let(:password_valid?) do
+        my_password = BCrypt::Password.new(user.encrypted_password)
+
+        my_password == valid_password
+      end
+
+      it { expect(password_valid?).to eq(true) }
     end
   end
 end
