@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :user do
-    name { 'MyString' }
-    email { 'MyString' }
-    encrypted_password { 'MyString' }
+    name { Faker::Name.name_with_middle }
+    email { Faker::Internet.email }
+    encrypted_password { SecureRandom.hex }
   end
 end
