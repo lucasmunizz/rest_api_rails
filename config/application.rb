@@ -14,6 +14,7 @@ module RestApi
     config.load_defaults 7.0
 
     config.api_only = true
+    config.time_zone = "Brasilia"
 
     #config.factory_bot.definition_file_paths = ['custom/factories']
   end

@@ -60,9 +60,9 @@ RSpec.describe User, type: :model do
 
   describe 'callback :before_create' do
     context 'when the password is in correct format' do
-      let(:valid_password) { 'ValidPassword@123'}
+      let(:valid_password) { 'ValidPassword@123' }
       let(:user) do
-        create(:user, encrypted_password: valid_password )
+        create(:user, encrypted_password: valid_password)
       end
 
       let(:password_valid?) do
@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
 
   describe 'callback :before_update' do
     context 'when the password is in correct format' do
-      let(:valid_password) { 'ValidPasswordUpdate@123'}
+      let(:valid_password) { 'ValidPasswordUpdate@123' }
       let(:user) { create(:user) }
 
       before do

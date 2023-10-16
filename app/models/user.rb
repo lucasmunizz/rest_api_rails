@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates :name, :email, :encrypted_password, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with: EMAIL_REGEX, message: INVALID_MESSAGE }
-  validates :encrypted_password, format: { with: PASSWORD_REGEX, message: INVALID_MESSAGE}
+  validates :encrypted_password, format: { with: PASSWORD_REGEX, message: INVALID_MESSAGE }
 
   before_create :set_encrypted_password
   before_update :set_encrypted_password, if: :encrypted_password_change?
